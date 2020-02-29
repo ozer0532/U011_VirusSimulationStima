@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// A directed graph datatype
+/// A weighted directed graph datatype
 /// </summary>
 /// <typeparam name="T">The type of node</typeparam>
 public class Graph<T> {
@@ -30,21 +30,12 @@ public class Graph<T> {
     /// <param name="index">Index of the node to check</param>
     /// <returns></returns>
 	public AdjacentNodes<T>[] Adjacent(int index) {
-		List<Node<T>> adjacents = nodes[index].adjacencyList;
+		Dictionary<Node<T>, float> adjacents = nodes[index].adjacencyList;
 		List<AdjacentNodes<T>> adjacentNodes = new List<AdjacentNodes<T>>();
-        foreach (Node<T> adjacent in adjacents) {
-			adjacentNodes.Add(new AdjacentNodes<T>(nodes[index], adjacent));
+        foreach (KeyValuePair<Node<T>, float> adjacent in adjacents) {
+			adjacentNodes.Add(new AdjacentNodes<T>(nodes[index].item, adjacent.Key.item, adjacent.Value));
         }
 		return adjacentNodes.ToArray();
-    }
-
-	/// <summary>
-    /// Returns the adjacent nodes of a node
-    /// </summary>
-    /// <param name="node">The node to check</param>
-    /// <returns></returns>
-	public AdjacentNodes<T>[] Adjacent(T node) {
-		return Adjacent(nodes.IndexOf(node));
     }
 
 	/// <summary>
@@ -52,18 +43,9 @@ public class Graph<T> {
 	/// </summary>
 	/// <param name="index1">The index of the node to connect from</param>
 	/// <param name="index2">The index of the node to connect to</param>
-	public void ConnectNodes(int index1, int index2) {
-		nodes[index1].adjacencyList.Add(nodes[index2]);
+	public void ConnectNodes(int index1, int index2, float weight = 1) {
+		nodes[index1].ConnectTo(nodes[index2], weight);
     }
-
-	/// <summary>
-	/// Make a connection between graph
-	/// </summary>
-	/// <param name="node1">The node to connect from</param>
-	/// <param name="node2">The node to connect to</param>
-	public void ConnectNodes(T node1, T node2) {
-		ConnectNodes(nodes.IndexOf(node1), nodes.IndexOf(node2));
-	}
 
 	/// <summary>
 	/// Get the item at index i
@@ -71,20 +53,20 @@ public class Graph<T> {
 	/// <param name="i">Item index</param>
 	/// <returns></returns>
 	public T this[int i] {
-		get { return nodes[i]; }
+		get { return nodes[i].item; }
 	}
 
 	private class Node<T> {
 		public T item;
-		public List<Node<T>> adjacencyList = new List<Node<T>>();
+		public Dictionary<Node<T>, float> adjacencyList = new Dictionary<Node<T>, float>();
 
 		public Node(T item) {
 			this.item = item;
 		}
 
-		public void ConnectTo (Node<T> node) {
-			if (!adjacencyList.Contains(node)) {
-				adjacencyList.Add(node);
+		public void ConnectTo (Node<T> node, float weight = 1) {
+			if (!adjacencyList.ContainsKey(node)) {
+				adjacencyList.Add(node, weight);
             }
 		}
 	}
@@ -96,10 +78,12 @@ public class Graph<T> {
 	public class AdjacentNodes<T> {
 		public T first;
 		public T second;
+		public float weight;
 
-		public AdjacentNodes(T first, T second) {
+		public AdjacentNodes(T first, T second, float weight) {
 			this.first = first;
 			this.second = second;
+			this.weight = weight;
 		}
     }
 	
