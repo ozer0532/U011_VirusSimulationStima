@@ -6,6 +6,31 @@ using System.Windows.Forms;
 
 namespace Virus_Simulator
 {
+    public class Algo
+    {
+        public void BFS<T>(Graph<T> G, T S)
+        {
+            //Inisialisasi Kota awal
+            int K0 = 0; // Masukkan user, K0 adalah indeks kota awal
+            
+            //Make Array Time BFS
+            int[] Time = new int[G.Size];
+            Time[K0] = 0;
+            for (int i=0; i<=G.Size; i++) {
+                if (i!=K0) {
+                    Time[i] = int.MaxValue;
+                }
+            }
+
+
+
+
+   
+              
+        }
+    }
+
+
     static class Program
     {
         /// <summary>
@@ -14,9 +39,6 @@ namespace Virus_Simulator
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
             Console.WriteLine("Hello World!");
         }
     }
