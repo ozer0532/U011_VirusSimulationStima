@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// <typeparam name="T">The type of node</typeparam>
 public class Graph<T> {
 
-	private List<Node<T>> nodes = new List<Node<T>>();
+	public List<Node<T>> nodes = new List<Node<T>>();
 
 	/// <summary>
 	/// Add item into the graph as a node
@@ -56,7 +56,7 @@ public class Graph<T> {
 		get { return nodes[i].item; }
 	}
 
-	private class Node<T> {
+	public class Node<T> {
 		public T item;
 		public Dictionary<Node<T>, float> adjacencyList = new Dictionary<Node<T>, float>();
 
