@@ -13,8 +13,8 @@ public class Graph<T> {
 	/// Add item into the graph as a node
 	/// </summary>
 	/// <param name="item">The object to insert to</param>
-	public void AddItem(T item) {
-		nodes.Add(new Node<T>(item));
+	public void AddNode(T node) {
+		nodes.Add(new Node<T>(node));
 	}
 
 	/// <summary>
