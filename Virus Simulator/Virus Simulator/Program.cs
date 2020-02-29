@@ -12,6 +12,9 @@ namespace Virus_Simulator
         {
             //Inisialisasi Kota awal
             int K0 = 0; // Masukkan user, K0 adalah indeks kota awal
+            Queue<Graph<T>.AdjacentNodes<T>> QueueKota = new Queue[G.Size];
+            QueueKota<T>.Append<T>(G.Adjacent(K0));
+
             
             //Make Array Time BFS
             int[] Time = new int[G.Size];
