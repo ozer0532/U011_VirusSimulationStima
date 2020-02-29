@@ -14,7 +14,12 @@ namespace Virus_Simulator
         {
             //Inisialisasi Kota awal
             int K0 = 0; // Masukkan user, K0 adalah indeks kota awal
-            
+            Queue<Graph<T>.AdjacentNodes<T>> QueueKota = new Queue<Graph<T>.AdjacentNodes<T>>();
+            Graph<T>.AdjacentNodes<T>[] adjacentNodes = G.Adjacent(K0);
+            foreach (Graph<T>.AdjacentNodes<T> adjacentNode in adjacentNodes) {
+                QueueKota.Enqueue(adjacentNode);
+            }
+
             //Make Array Time BFS
             int[] Time = new int[G.Size];
             Time[K0] = 0;
@@ -23,16 +28,18 @@ namespace Virus_Simulator
                     Time[i] = int.MaxValue;
                 }
             }
+            while (QueueKota.Count!=0)
+            {
+                Graph<T>.AdjacentNodes<T> KotaPop = QueueKota.Dequeue();
 
+            }
 
-
+            
 
    
               
         }
     }
-
-
     static class Program
     {
         /// <summary>
