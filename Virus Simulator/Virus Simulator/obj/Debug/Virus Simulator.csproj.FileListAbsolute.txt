@@ -1,0 +1,9 @@
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\bin\Debug\Virus Simulator.exe.config
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\bin\Debug\Virus Simulator.exe
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\bin\Debug\Virus Simulator.pdb
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus Simulator.csprojAssemblyReference.cache
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus_Simulator.Form1.resources
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus_Simulator.Properties.Resources.resources
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus Simulator.csproj.GenerateResource.cache
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus Simulator.exe
+C:\Users\User\Documents\Uni Stuff\STA - Tugas Stima\Tubes 2 - Virus Spread Simulation\Virus Simulator\Virus Simulator\obj\Debug\Virus Simulator.pdb
