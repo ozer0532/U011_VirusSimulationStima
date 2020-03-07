@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace Virus_Simulator
 {
     public class Algo
@@ -28,15 +27,10 @@ namespace Virus_Simulator
                     Time[i] = int.MaxValue;
                 }
             }
-            while (QueueKota.Count!=0)
-            {
+            while (QueueKota.Count!=0) {
                 Graph<T>.AdjacentNodes<T> KotaPop = QueueKota.Dequeue();
 
             }
-
-            
-
-   
               
         }
     }
@@ -53,14 +47,18 @@ namespace Virus_Simulator
             List<City> Cities = new List<City>();
             City firstInfectedCity = new City();
             ReadCities(Cities, firstInfectedCity);
-            foreach (City c in Cities)
+            foreach (City city in Cities)
             {
-                Country.AddNode(c);
+                Country.AddNode(city);
             }
             ReadCitiesConnection(Country);
+
+            // Show Form
+            Form1 form = new Form1();
+            form.ShowDialog();
         }
 
-        static void ReadCities(List<City> Cities, City firstInfectedCity)
+        public static void ReadCities(List<City> Cities, City firstInfectedCity)
         {
             const string fileName = "../../CitiesInfo.txt";
             try
@@ -92,7 +90,7 @@ namespace Virus_Simulator
             }
         }
 
-        static void ReadCitiesConnection(Graph<City> Country)
+        public static void ReadCitiesConnection(Graph<City> Country)
         {
             const string fileName = "../../CitiesConnection.txt";
             try
