@@ -42,7 +42,6 @@ namespace Virus_Simulator
                     Time[i] = int.MaxValue;
                 }
             }
-<<<<<<< HEAD
 
             int waktusebar = 0;
             while (QueueKota.Count!=0)
@@ -65,13 +64,6 @@ namespace Virus_Simulator
                     }
                 }
             }   
-=======
-            while (QueueKota.Count!=0) {
-                Graph<T>.AdjacentNodes<T> KotaPop = QueueKota.Dequeue();
-
-            }
-              
->>>>>>> 18fd58515eac90a90e139b74becea4e004151767
         }
     }
     static class Program
@@ -80,13 +72,6 @@ namespace Virus_Simulator
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-<<<<<<< HEAD
-        static void Main() {
-            Console.WriteLine("Hello World!");
-        }
-    }
-}
-=======
         static void Main()
         {
             
@@ -186,4 +171,3 @@ namespace Virus_Simulator
     }
 
 }
->>>>>>> 18fd58515eac90a90e139b74becea4e004151767
