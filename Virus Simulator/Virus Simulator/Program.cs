@@ -123,6 +123,19 @@ namespace Virus_Simulator
                 Console.WriteLine(e.Message);
             }
         }
+
+        public static void DrawInfected(Microsoft.Msagl.Drawing.Graph graph, string city) 
+        {
+            graph.FindNode(city).Attr.Color = Microsoft.Msagl.Drawing.Color.Crimson;
+        }
+
+        public static void DrawInfection(Microsoft.Msagl.Drawing.Graph graph, string from, string to)
+        {
+            var edge = graph.FindNode(from).OutEdges.Where(e => e.Target == to).Single();
+            DrawInfected(graph, edge.Source);
+            DrawInfected(graph, edge.Target);
+            edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Crimson;
+        }
     }
 
 }

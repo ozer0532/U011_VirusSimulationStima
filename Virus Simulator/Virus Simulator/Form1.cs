@@ -40,18 +40,17 @@ namespace Virus_Simulator
                     thisNode = graph.FindNode(city.name);
                 }
                 Graph<City>.AdjacentNodes<City>[] adjacentNodes = Country.Adjacent(i);
-                Console.WriteLine(city.name);
-                Console.WriteLine(thisNode.InEdges.Count());
                 foreach (Graph<City>.AdjacentNodes<City> adj in adjacentNodes)
                 {
                     if (thisNode.InEdges.Where(edge => edge.Source == adj.second.name).Count() != 0) {
                         thisNode.InEdges.Where(edge => edge.Source == adj.second.name).Single().Attr.ArrowheadAtSource = Microsoft.Msagl.Drawing.ArrowStyle.Normal;
                     } else {
                         graph.AddEdge(adj.first.name, adj.second.name);
-                        //Console.WriteLine(thisNode.OutEdges.Where(edge => edge.Target == adj.second.name).Count());
                     }
                 }
             }
+
+            Program.DrawInfection(graph, "A", "B");
             //graph.AddEdge("A", "B");
             //graph.AddEdge("B", "C");
             //graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
