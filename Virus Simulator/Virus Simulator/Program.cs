@@ -9,35 +9,36 @@ namespace Virus_Simulator
 {
     public class Algo
     {
-        public double I(int Pa, int ta) // Populasi kota A (P(A)), ta menunjukkan waktu hari t(a)
+        public static double I(int Pa, int ta) // Populasi kota A (P(A)), ta menunjukkan waktu hari t(a)
         {
-            return Convert.ToDouble(Pa)/(1+(Pa-1)* Math.Pow(Math.E,0.25*ta));
+            return Convert.ToDouble(Pa)/(1+(Pa-1)* Math.Pow(Math.E,-0.25*ta));
         }
-        public double S(int Pa, int ta, int Tr) {
+        public static double S(int Pa, int ta, float Tr) {
             return I(Pa, ta) * Tr;
         }
-        public int lamaWaktuNyebar(int Pa, int Tr) {
-            //belom jadi
-            return Tr;
+        public static int lamaWaktuNyebar(int Pa, float Tr) {
+            double dPa = Pa;
+            double dTr = Tr;
+            double waktuSebar = -4 * Math.Log((dPa * dTr - 1) / (dPa - 1));
+            int ceilWaktuSebar = (int)Math.Ceiling(waktuSebar);
+            return (waktuSebar == ceilWaktuSebar) ? ceilWaktuSebar + 1 : ceilWaktuSebar;
         }
 
-        public void BFS<T>(Graph<T> G)
+        public static Graph<T>.AdjacentNodes<T>[] BFS<T>(Graph<T> graph, int K0, int Tot)
         {
             //Inisialisasi Kota awal
-            int K0 = 0;  // Masukkan user, K0 adalah indeks kota awal
-            int Tot = 3; // Masukkan user, T adalah jumlah hari total
-            int Pa = 0;  //Masukkan User, Misalkan Pa adalah peluang Pa;
-            int Tr = 0; // Masukkan user Tr;
-            Queue<Graph<T>.AdjacentNodes<T>> QueueKota = new Queue<Graph<T>.AdjacentNodes<T>>();
-            Graph<T>.AdjacentNodes<T>[] adjacentNodes = G.Adjacent(K0);
-            foreach (Graph<T>.AdjacentNodes<T> adjacentNode in adjacentNodes) {
+            Graph<City> G = graph as Graph<City>;
+            Queue<Graph<City>.AdjacentNodes<City>> QueueKota = new Queue<Graph<City>.AdjacentNodes<City>>();
+            Graph<City>.AdjacentNodes<City>[] adjacentNodes = G.Adjacent(K0);
+            foreach (Graph<City>.AdjacentNodes<City> adjacentNode in adjacentNodes) {
                 QueueKota.Enqueue(adjacentNode);
             }
+            List<Graph<City>.AdjacentNodes<City>> infectionPath = new List<Graph<City>.AdjacentNodes<City>>();
 
             //Make Array Time BFS
             int[] Time = new int[G.Size];
             Time[K0] = 0;
-            for (int i=0; i<=G.Size; i++) {
+            for (int i=0; i<G.Size; i++) {
                 if (i!=K0) {
                     Time[i] = int.MaxValue;
                 }
@@ -46,24 +47,44 @@ namespace Virus_Simulator
             int waktusebar = 0;
             while (QueueKota.Count!=0)
             {
-                Graph<T>.AdjacentNodes<T> KotaPop = QueueKota.Dequeue();
+                Graph<City>.AdjacentNodes<City> KotaPop = QueueKota.Dequeue();
                 int ta;
-                ta = Tot - Time[K0];
-                
+                ta = Tot - Time[G.FindNodeIndex(n => n.item.name == KotaPop.first.name)];
+                Console.WriteLine(KotaPop.first.name + " -> " + KotaPop.second.name);
+                Console.WriteLine(KotaPop.first.population);
+                Console.WriteLine(ta);
+                Console.WriteLine(KotaPop.weight);
+                Console.WriteLine(S(KotaPop.first.population, ta, KotaPop.weight));
+                Console.WriteLine(lamaWaktuNyebar(KotaPop.first.population, KotaPop.weight) + Time[G.FindNodeIndex(n => n.item.name == KotaPop.first.name)]);
                 //Check apakah virus menyebar
-                if (S(Pa,ta,Tr)>1)
+                if (S(KotaPop.first.population,ta,KotaPop.weight) > 1)
                 {
                     //Cari lama waktu menyebar
-                    waktusebar = lamaWaktuNyebar(Pa, Tr) + Time[0];
-                    if (waktusebar > Time[KotaPop]) { //error instance
+                    waktusebar = lamaWaktuNyebar(KotaPop.first.population, KotaPop.weight) + Time[G.FindNodeIndex(n => n.item.name == KotaPop.first.name)];
+                    if (waktusebar >= Time[G.FindNodeIndex(n => n.item.name == KotaPop.second.name)]) {
                         //Do nothing
                     }
                     else{
-                        Time[KotaPop] = waktusebar; // error instace
-                        QueueKota.Enqueue(KotaPop);
+                        // Hapus path lama
+                        infectionPath.RemoveAll(adj => adj.second == KotaPop.second);
+                        // Tambah path baru
+                        infectionPath.Add(KotaPop);
+
+                        // Update awal penyebaran
+                        Time[G.FindNodeIndex(n => n.item.name == KotaPop.second.name)] = waktusebar;
+
+                        // Push neighbors
+                        var neighbors = G.Adjacent(G.FindNodeIndex(n => n.item.name == KotaPop.second.name));
+                        foreach (var neighbor in neighbors)
+                        {
+                            QueueKota.Enqueue(neighbor);
+                        }
+
+                        Console.WriteLine("Duar kena korona " + KotaPop.first.name + " -> " + KotaPop.second.name);
                     }
                 }
-            }   
+            }
+            return infectionPath.ToArray() as Graph<T>.AdjacentNodes<T>[];
         }
     }
     static class Program
@@ -74,17 +95,6 @@ namespace Virus_Simulator
         [STAThread]
         static void Main()
         {
-            
-            Graph<City> Country = new Graph<City>();
-            List<City> Cities = new List<City>();
-            City firstInfectedCity = new City();
-            ReadCities(Cities, firstInfectedCity);
-            foreach (City city in Cities)
-            {
-                Country.AddNode(city);
-            }
-            ReadCitiesConnection(Country);
-
             // Show Form
             Form1 form = new Form1();
             form.ShowDialog();

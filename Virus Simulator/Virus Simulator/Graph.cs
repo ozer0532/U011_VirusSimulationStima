@@ -10,6 +10,16 @@ public class Graph<T> {
 	public List<Node<T>> nodes = new List<Node<T>>();
 
 	/// <summary>
+	/// Find the node index of the specified item
+	/// </summary>
+	/// <param name="item">The object which index is looked for</param>
+	/// <returns></returns>
+	public int FindNodeIndex (Predicate<Node<T>> match)
+	{
+		return nodes.FindIndex(match);
+	}
+
+	/// <summary>
 	/// Add item into the graph as a node
 	/// </summary>
 	/// <param name="item">The object to insert to</param>

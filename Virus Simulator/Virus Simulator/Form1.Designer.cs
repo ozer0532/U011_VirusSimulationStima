@@ -30,26 +30,21 @@
         {
             Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation planeTransformation1 = new Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.graphViewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            this.infectionList = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.vScrollBar1);
+            this.panel1.Controls.Add(this.infectionList);
             this.panel1.Location = new System.Drawing.Point(588, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 426);
             this.panel1.TabIndex = 0;
-            // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(183, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 429);
-            this.vScrollBar1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // graphViewer
             // 
@@ -92,6 +87,15 @@
             this.graphViewer.ZoomWindowThreshold = 0.05D;
             this.graphViewer.Load += new System.EventHandler(this.gViewer1_Load);
             // 
+            // infectionList
+            // 
+            this.infectionList.AutoSize = true;
+            this.infectionList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.infectionList.Location = new System.Drawing.Point(3, 0);
+            this.infectionList.Name = "infectionList";
+            this.infectionList.Size = new System.Drawing.Size(0, 20);
+            this.infectionList.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,6 +106,7 @@
             this.Name = "Form1";
             this.Text = "Virus Simulator.exe";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -109,8 +114,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private Microsoft.Msagl.GraphViewerGdi.GViewer graphViewer;
+        private System.Windows.Forms.Label infectionList;
     }
 }
 

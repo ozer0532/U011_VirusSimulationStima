@@ -29,6 +29,7 @@ namespace Virus_Simulator
             Program.ReadCitiesConnection(Country);
 
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
+
             // Draw nodes
             for (int i = 0; i < Country.nodes.Count; i++)
             {
@@ -49,6 +50,13 @@ namespace Virus_Simulator
                     }
                 }
             }
+            Graph<City>.AdjacentNodes<City>[] infectionPath = Algo.BFS(Country, Country.FindNodeIndex(n => n.item.name == firstInfectedCity.name), 30);
+
+            foreach (var infection in infectionPath)
+            {
+                Program.DrawInfection(graph, infection.first.name, infection.second.name);
+                infectionList.Text += infection.first.name + " => " + infection.second.name + "\n";
+            }
 
             //graph.AddEdge("A", "B");
             //graph.AddEdge("B", "C");
@@ -60,6 +68,11 @@ namespace Virus_Simulator
             //c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
 
             graphViewer.Graph = graph;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
