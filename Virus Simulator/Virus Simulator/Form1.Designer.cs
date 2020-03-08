@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation planeTransformation1 = new Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation();
+            Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation planeTransformation4 = new Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation();
             this.panel1 = new System.Windows.Forms.Panel();
             this.graphViewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             this.infectionList = new System.Windows.Forms.Label();
@@ -80,7 +80,7 @@
             this.graphViewer.TabIndex = 1;
             this.graphViewer.TightOffsetForRouting = 0.125D;
             this.graphViewer.ToolBarIsVisible = true;
-            this.graphViewer.Transform = planeTransformation1;
+            this.graphViewer.Transform = planeTransformation4;
             this.graphViewer.UndoRedoButtonsVisible = true;
             this.graphViewer.WindowZoomButtonPressed = false;
             this.graphViewer.ZoomF = 1D;
@@ -103,7 +103,11 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.graphViewer);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Virus Simulator.exe";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
