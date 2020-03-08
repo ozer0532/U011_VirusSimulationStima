@@ -50,7 +50,6 @@ namespace Virus_Simulator
                 }
             }
 
-            Program.DrawInfection(graph, "A", "B");
             //graph.AddEdge("A", "B");
             //graph.AddEdge("B", "C");
             //graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
