@@ -11,7 +11,7 @@ namespace Virus_Simulator
     {
         public double I(int Pa, int ta) // Populasi kota A (P(A)), ta menunjukkan waktu hari t(a)
         {
-            return Convert.ToDouble(Pa)/(1+(Pa-1)* Math.Pow(2.71828,0.25*ta));
+            return Convert.ToDouble(Pa)/(1+(Pa-1)* Math.Pow(Math.E,0.25*ta));
         }
         public double S(int Pa, int ta, int Tr) {
             return I(Pa, ta) * Tr;
