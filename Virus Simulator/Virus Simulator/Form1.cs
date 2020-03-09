@@ -50,29 +50,48 @@ namespace Virus_Simulator
                     }
                 }
             }
-            Graph<City>.AdjacentNodes<City>[] infectionPath = Algo.BFS(Country, Country.FindNodeIndex(n => n.item.name == firstInfectedCity.name), 30);
 
-            foreach (var infection in infectionPath)
-            {
-                Program.DrawInfection(graph, infection.first.name, infection.second.name);
-                infectionList.Text += infection.first.name + " => " + infection.second.name + "\n";
-            }
-
-            //graph.AddEdge("A", "B");
-            //graph.AddEdge("B", "C");
-            //graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-            //graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-            //graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
-            //Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
-            //c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
-            //c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
+            Program.firstInfectedCity = firstInfectedCity;
+            Program.Country = Country;
 
             graphViewer.Graph = graph;
+        }
+
+        private void ResetInfection() {
+            foreach (var node in graphViewer.Graph.Nodes) {
+                node.Attr.Color = Microsoft.Msagl.Drawing.Color.Black;
+            }
+            foreach (var edge in graphViewer.Graph.Edges) {
+                edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Black;
+            }
+        }
+
+        private void Infect(int t) {
+            Graph<City>.AdjacentNodes<City>[] infectionPath = Algo.BFS(Program.Country, Program.Country.FindNodeIndex(n => n.item.name == Program.firstInfectedCity.name), t);
+            infectionList.Text = "";
+            if (t >= 0)
+            {
+                Program.DrawInfected(graphViewer.Graph, Program.firstInfectedCity.name);
+            }
+            foreach (var infection in infectionPath)
+            {
+                Program.DrawInfection(graphViewer.Graph, infection.first.name, infection.second.name);
+                infectionList.Text += infection.first.name + " => " + infection.second.name + "\n";
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void runButton_Click(object sender, EventArgs e) {
+            graphViewer.SuspendLayout();
+            ResetInfection();
+            Infect((int)inputField.Value);
+            graphViewer.Pan(1, 0);
+            graphViewer.Pan(-1, 0);
+            graphViewer.ResumeLayout();
         }
     }
 }

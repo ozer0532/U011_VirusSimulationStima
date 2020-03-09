@@ -89,6 +89,9 @@ namespace Virus_Simulator
     }
     static class Program
     {
+        public static Graph<City> Country;
+        public static City firstInfectedCity;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
