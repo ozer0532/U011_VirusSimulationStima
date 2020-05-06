@@ -1,2 +1,2 @@
-# virus_simulation
-Simulasi Penyebaran Virus Penyakit dengan Memanfaatkan Algoritma BFS untuk Penelusuran pada Graf
+# Virus Simulation Program
+Virus spread simulation program written in C#. This program utilizes BFS to determine the cities infected by the virus.
